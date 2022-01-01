@@ -1,0 +1,42 @@
+import { Grid, TextField, InputAdornment, IconButton } from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+
+function Input({
+  half,
+  name,
+  label,
+  type,
+  autoFocus,
+  handleChange,
+  handleShowPassword,
+}) {
+  return (
+    <Grid item xs={12} sm={half ? 6 : 12}>
+      <TextField
+        name={name}
+        variant="outlined"
+        onChange={handleChange}
+        required
+        fullWidth
+        label={label}
+        autoFocus={autoFocus}
+        type={type}
+        InputProps={
+          name === "password"
+            ? {
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowPassword}>
+                      {type === "password" ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }
+            : null
+        }
+      />
+    </Grid>
+  );
+}
+
+export default Input;
